@@ -14,7 +14,7 @@
 int main(int argc, char** argv)
 {
     // Default directory with images relative to executable.
-    std::filesystem::path resource_dir = "../image";
+    std::filesystem::path resource_dir = "../../../../image";
     if (argc > 1)
         resource_dir = argv[1];
 
@@ -32,12 +32,13 @@ int main(int argc, char** argv)
 
     demo->prepare(resource_dir);
 
-    std::cout << "Press Enter or Spacebar to apply parameters. Press Esc to exit...\n";
+    std::cout << "press enter or spacebar to apply parameters. press esc to exit...\n";
     do
     {
         demo->execute_opencv();
         demo->execute_openvx();
         demo->make_diff();
+        if (demo->to_string() == "moments" || demo->to_string() == "hu moments") break;
     } while (cv::waitKey(0) != 27);
 
     return 0;
